@@ -1,8 +1,0 @@
-{
-    "greeting": {
-        "sayhi": "ハロー"
-    },
-    "error": {
-        "delete_error": "削除できませんでした"
-    }         
-}

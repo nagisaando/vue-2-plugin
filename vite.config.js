@@ -1,16 +1,9 @@
 import { defineConfig } from "vite";
 const { createVuePlugin } = require("vite-plugin-vue2");
 const path = require("path");
-import ScriptSetup from "unplugin-vue2-script-setup/vite";
-import { fileURLToPath, URL } from "url";
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    createVuePlugin(),
-    ScriptSetup({
-      /* options */
-    }),
-  ],
+  plugins: [createVuePlugin()],
   test: {
     globals: true,
     environment: "jsdom",
@@ -23,7 +16,6 @@ export default defineConfig({
     // },
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "~bootstrap": "bootstrap",
     },
   },
 });

@@ -1,75 +1,48 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-// import BaseAlert from "./components/base/BaseAlert.vue";
-// import BaseDatePicker from "./components/base/BaseDatePicker.vue";
-// import BaseInput from "./components/base/BaseInput.vue";
-// import BaseTable from "./components/base/BaseTable.vue";
-
-// import LocaleWorkAround from "./components/workaround/LocaleWorkAround.vue";
-// import OrmWorkAround from "./components/workaround/OrmWorkAround.vue";
-// import RenderFunction from "./components/workaround/RenderFunction.vue";
-// import AxiosCall from "./components/workaround/AxiosCall.vue";
-
-import List from "./components/workaround/List.vue";
-import { useCounterStore } from "@/stores/useCounter";
-import localeValidate from "./components/workaround/localeValidate.vue";
-import BaseButton from "./components/base/BaseButton.vue";
-import ValidationInput from "./components/workaround/ValidationInput.vue";
-
-// import { inject } from "@vue/composition-api";
-
-// const i18n = inject("i18n");
-
-// console.log(i18n.greetings.hello);
-
-// ------------------Pinia-------------------------
-// counter.count++;
-// with autocompletion ✨
-// counter.$patch({ count: counter.count + 1 });
-// or using an action instead
-
-const counter = useCounterStore();
-function addCount() {
-  counter.increment();
-}
-function navigate() {
-  this.$router.push("/2");
-  console.log("but do you see me tho?");
-}
-
-console.log(counter);
-</script>
 <template>
   <div id="app">
-    <ValidationInput />
-    <!-- <AxiosCall /> -->
-    <!-- <LocaleWorkAround />
-    <hr style="margin: 4rem 0" />
-    <OrmWorkAround />
-    <hr style="margin: 4rem 0" /> 
-    <h1>{{ $translate("greetings.hello") }}</h1>
-    <RenderFunction />
-    -->
-    <!-- <localeValidate /> -->
-    <!-- <BaseButton /> -->
-    <!-- <router-view></router-view>
-    <List />
+    <ValidationObserver ref="observer" v-slot="{ invalid }" tag="form">
+      <form @submit.prevent="submit()">
+        <ValidationProvider name="email" rules="required" v-slot="{ errors }">
+          <input type="text" v-model="email" placeholder="type some email" />
+          <span>{{ errors[0] }}</span>
+        </ValidationProvider>
 
-    <button @click="navigate">navigate</button>
-    <b-button @click="addCount">increment</b-button> -->
-    <!--
-    <hr style="margin: 4rem 0" />
-    <BaseInput />
-    <hr style="margin: 4rem 0" />
-    <BaseAlert />
-    <hr style="margin: 4rem 0" />
-    <BaseDatePicker />
-    <hr style="margin: 4rem 0" />
-    <BaseTable /> -->
+        <button>Submit</button>
+      </form>
+    </ValidationObserver>
   </div>
 </template>
 
+<script>
+import { ValidationProvider, ValidationObserver } from "vee-validate";
+
+export default {
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
+  data() {
+    return {
+      email: "",
+      greeting: "",
+    };
+  },
+  methods: {
+    async submit() {
+      console.log("submit");
+      console.log(this.$refs.observer.refs);
+      const isValid = await this.$refs.observer.validate();
+
+      console.log(this.$refs.observer.refs);
+      //   if (!isValid) {
+      //     // ABORT!!
+      //   }
+
+      //   // 🐿 ship it
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
