@@ -14,6 +14,8 @@
 import List from "./components/workaround/List.vue";
 import { useCounterStore } from "@/stores/useCounter";
 import localeValidate from "./components/workaround/localeValidate.vue";
+import BaseButton from "./components/base/BaseButton.vue";
+import ValidationInput from "./components/workaround/ValidationInput.vue";
 
 // import { inject } from "@vue/composition-api";
 
@@ -40,6 +42,7 @@ console.log(counter);
 </script>
 <template>
   <div id="app">
+    <ValidationInput />
     <!-- <AxiosCall /> -->
     <!-- <LocaleWorkAround />
     <hr style="margin: 4rem 0" />
@@ -48,7 +51,8 @@ console.log(counter);
     <h1>{{ $translate("greetings.hello") }}</h1>
     <RenderFunction />
     -->
-    <localeValidate />
+    <!-- <localeValidate /> -->
+    <!-- <BaseButton /> -->
     <!-- <router-view></router-view>
     <List />
 

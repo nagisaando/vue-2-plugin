@@ -25,7 +25,7 @@ const messages = {
   },
 };
 
-test("test", async () => {
+test.skip("test", async () => {
   // The render method returns a collection of utilities to query your component.
   const { getByText } = render(
     Component,
