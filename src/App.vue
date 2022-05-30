@@ -13,7 +13,7 @@
 
 import List from "./components/workaround/List.vue";
 import { useCounterStore } from "@/stores/useCounter";
-import localeValidate from "./components/workaround/localeValidate.vue";
+// import localeValidate from "./components/workaround/localeValidate.vue";
 
 // import { inject } from "@vue/composition-api";
 
@@ -36,10 +36,16 @@ function navigate() {
   console.log("but do you see me tho?");
 }
 
+addCount();
+addCount();
+
+console.log(counter.count);
+
 console.log(counter);
 </script>
 <template>
   <div id="app">
+    <p>Times clicked: 0</p>
     <!-- <AxiosCall /> -->
     <!-- <LocaleWorkAround />
     <hr style="margin: 4rem 0" />
@@ -48,7 +54,7 @@ console.log(counter);
     <h1>{{ $translate("greetings.hello") }}</h1>
     <RenderFunction />
     -->
-    <localeValidate />
+    <!-- <localeValidate /> -->
     <!-- <router-view></router-view>
     <List />
 

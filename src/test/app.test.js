@@ -1,20 +1,26 @@
 import { render, fireEvent, screen } from "@testing-library/vue";
 import { createTestingPinia } from "@pinia/testing";
 import Component from "../App.vue";
-import { setActivePinia, createPinia } from "pinia";
+import { setActivePinia, createPinia, PiniaVuePlugin } from "pinia";
 import { BButton } from "bootstrap-vue";
 import { useCounterStore } from "@/stores/useCounter";
-test.skip("increments value on click", async () => {
+import vueCompositionApi from "@vue/composition-api";
+test("increments value on click", async () => {
   // The render method returns a collection of utilities to query your component.
-  const { getByText } = render(Component, {
-    global: {
-      plugins: [createTestingPinia()],
+  const { getByText } = render(
+    Component,
+    {
+      pinia: createPinia(),
+      stubs: {
+        // used to register custom components
+        "b-button": BButton,
+      },
     },
-    stubs: {
-      // used to register custom components
-      "b-button": BButton,
-    },
-  });
+    (vue) => {
+      vue.use(vueCompositionApi);
+      vue.use(PiniaVuePlugin);
+    }
+  );
 
   //   const store = useCounterStor();
 
